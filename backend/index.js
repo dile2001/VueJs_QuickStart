@@ -6,17 +6,21 @@ const app = express();
 const PORT = 3000;
 app.use(cors());
 app.use(bodyParser.json());
+var messages = [
+    "hello",
+    "hi",
+    "greeting!"
+];
 app.get('/messages', (req, res) => {
-    const  messages = [
-        "hello",
-        "hi",
-        "greeting!"
-    ]
+    
     res.send(messages);
 });
 app.post('/messages', (req, res) => {
-    console.log(req.body);
-    res.end();
+    let msg = req.body;
+    console.log(msg);
+    messages.push(msg.message);
+    res.json(msg);
+    console.log(messages);
 });
 app.listen(PORT, () => {
     console.log('listening...');
